@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="YouthEmpowermentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountName" Type="varchar" MaxLength="30" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="30" />
+          <Property Name="BVN" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="tblBusiness">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Training" Type="varchar" MaxLength="30" />
+          <Property Name="IntroducedBy" Type="varchar" MaxLength="40" />
+          <Property Name="BusinessType" Type="varchar" MaxLength="40" />
+          <Property Name="Amount" Type="varchar" MaxLength="20" />
+          <Property Name="NatureofBusiness" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Town" Type="varchar" MaxLength="30" />
+          <Property Name="Ward" Type="varchar" MaxLength="30" />
+          <Property Name="LGA" Type="varchar" MaxLength="30" />
+          <Property Name="ContactNum1" Type="varchar" MaxLength="13" />
+          <Property Name="PartyAddress" Type="varchar" MaxLength="50" />
+          <Property Name="NextofKin" Type="varchar" MaxLength="60" />
+          <Property Name="KinContact" Type="varchar" MaxLength="13" />
+          <Property Name="kinAddress" Type="varchar" MaxLength="40" />
+          <Property Name="ContactNum2" Type="varchar" MaxLength="13" />
+        </EntityType>
+        <EntityType Name="tblFingerprints">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fingerTemplate" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblPersonalDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="30" />
+          <Property Name="LastName" Type="varchar" MaxLength="30" />
+          <Property Name="Occupation" Type="varchar" MaxLength="40" />
+          <Property Name="Picture" Type="varbinary(max)" />
+          <Property Name="ContactID" Type="int" />
+          <Property Name="BusinessID" Type="int" />
+          <Property Name="AccountID" Type="int" />
+          <Property Name="FingerID" Type="int" />
+          <Property Name="DOB" Type="date" />
+        </EntityType>
+        <Association Name="FK__tblPerson__Accou__239E4DCF">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPerson__Busin__22AA2996">
+          <End Role="tblBusiness" Type="Self.tblBusiness" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBusiness">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="BusinessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPerson__Conta__21B6055D">
+          <End Role="tblContact" Type="Self.tblContact" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPerson__Finge__24927208">
+          <End Role="tblFingerprints" Type="Self.tblFingerprints" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFingerprints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="FingerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YouthEmpowermentModelStoreContainer">
+          <EntitySet Name="tblAccount" EntityType="Self.tblAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBusiness" EntityType="Self.tblBusiness" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContact" EntityType="Self.tblContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFingerprints" EntityType="Self.tblFingerprints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPersonalDetails" EntityType="Self.tblPersonalDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblPerson__Accou__239E4DCF" Association="Self.FK__tblPerson__Accou__239E4DCF">
+            <End Role="tblAccount" EntitySet="tblAccount" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPerson__Busin__22AA2996" Association="Self.FK__tblPerson__Busin__22AA2996">
+            <End Role="tblBusiness" EntitySet="tblBusiness" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPerson__Conta__21B6055D" Association="Self.FK__tblPerson__Conta__21B6055D">
+            <End Role="tblContact" EntitySet="tblContact" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPerson__Finge__24927208" Association="Self.FK__tblPerson__Finge__24927208">
+            <End Role="tblFingerprints" EntitySet="tblFingerprints" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YouthEmpowermentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAccount">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BVN" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblPersonalDetails" Relationship="Self.FK__tblPerson__Accou__239E4DCF" FromRole="tblAccount" ToRole="tblPersonalDetails" />
+        </EntityType>
+        <EntityType Name="tblBusiness">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Training" Type="String" Unicode="false" FixedLength="false" MaxLength="30" />
+          <Property Name="BusinessType" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NatureofBusiness" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblPersonalDetails" Relationship="Self.FK__tblPerson__Busin__22AA2996" FromRole="tblBusiness" ToRole="tblPersonalDetails" />
+          <Property Name="IntroducedBy" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Town" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Ward" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LGA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PartyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NextofKin" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="kinAddress" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblPersonalDetails" Relationship="Self.FK__tblPerson__Conta__21B6055D" FromRole="tblContact" ToRole="tblPersonalDetails" />
+          <Property Name="ContactNum1" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="KinContact" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNum2" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblFingerprint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fingerTemplate" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tblPersonalDetails" Relationship="Self.FK__tblPerson__Finge__24927208" FromRole="tblFingerprints" ToRole="tblPersonalDetails" />
+        </EntityType>
+        <EntityType Name="tblPersonalDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Occupation" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ContactID" Type="Int32" />
+          <Property Name="BusinessID" Type="Int32" />
+          <Property Name="AccountID" Type="Int32" />
+          <Property Name="FingerID" Type="Int32" />
+          <NavigationProperty Name="tblAccount" Relationship="Self.FK__tblPerson__Accou__239E4DCF" FromRole="tblPersonalDetails" ToRole="tblAccount" />
+          <NavigationProperty Name="tblBusiness" Relationship="Self.FK__tblPerson__Busin__22AA2996" FromRole="tblPersonalDetails" ToRole="tblBusiness" />
+          <NavigationProperty Name="tblContact" Relationship="Self.FK__tblPerson__Conta__21B6055D" FromRole="tblPersonalDetails" ToRole="tblContact" />
+          <NavigationProperty Name="tblFingerprint" Relationship="Self.FK__tblPerson__Finge__24927208" FromRole="tblPersonalDetails" ToRole="tblFingerprints" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK__tblPerson__Accou__239E4DCF">
+          <End Role="tblAccount" Type="Self.tblAccount" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAccount">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPerson__Busin__22AA2996">
+          <End Role="tblBusiness" Type="Self.tblBusiness" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBusiness">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="BusinessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPerson__Conta__21B6055D">
+          <End Role="tblContact" Type="Self.tblContact" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPerson__Finge__24927208">
+          <End Role="tblFingerprints" Type="Self.tblFingerprint" Multiplicity="0..1" />
+          <End Role="tblPersonalDetails" Type="Self.tblPersonalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFingerprints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblPersonalDetails">
+              <PropertyRef Name="FingerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YouthEmpowermentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAccounts" EntityType="Self.tblAccount" />
+          <EntitySet Name="tblBusinesses" EntityType="Self.tblBusiness" />
+          <EntitySet Name="tblContacts" EntityType="Self.tblContact" />
+          <EntitySet Name="tblFingerprints" EntityType="Self.tblFingerprint" />
+          <EntitySet Name="tblPersonalDetails" EntityType="Self.tblPersonalDetail" />
+          <AssociationSet Name="FK__tblPerson__Accou__239E4DCF" Association="Self.FK__tblPerson__Accou__239E4DCF">
+            <End Role="tblAccount" EntitySet="tblAccounts" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPerson__Busin__22AA2996" Association="Self.FK__tblPerson__Busin__22AA2996">
+            <End Role="tblBusiness" EntitySet="tblBusinesses" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPerson__Conta__21B6055D" Association="Self.FK__tblPerson__Conta__21B6055D">
+            <End Role="tblContact" EntitySet="tblContacts" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPerson__Finge__24927208" Association="Self.FK__tblPerson__Finge__24927208">
+            <End Role="tblFingerprints" EntitySet="tblFingerprints" />
+            <End Role="tblPersonalDetails" EntitySet="tblPersonalDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YouthEmpowermentModelStoreContainer" CdmEntityContainer="YouthEmpowermentEntities">
+          <EntitySetMapping Name="tblAccounts">
+            <EntityTypeMapping TypeName="YouthEmpowermentModel.tblAccount">
+              <MappingFragment StoreEntitySet="tblAccount">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BVN" ColumnName="BVN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBusinesses">
+            <EntityTypeMapping TypeName="YouthEmpowermentModel.tblBusiness">
+              <MappingFragment StoreEntitySet="tblBusiness">
+                <ScalarProperty Name="IntroducedBy" ColumnName="IntroducedBy" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Training" ColumnName="Training" />
+                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NatureofBusiness" ColumnName="NatureofBusiness" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContacts">
+            <EntityTypeMapping TypeName="YouthEmpowermentModel.tblContact">
+              <MappingFragment StoreEntitySet="tblContact">
+                <ScalarProperty Name="ContactNum2" ColumnName="ContactNum2" />
+                <ScalarProperty Name="KinContact" ColumnName="KinContact" />
+                <ScalarProperty Name="ContactNum1" ColumnName="ContactNum1" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="Ward" ColumnName="Ward" />
+                <ScalarProperty Name="LGA" ColumnName="LGA" />
+                <ScalarProperty Name="PartyAddress" ColumnName="PartyAddress" />
+                <ScalarProperty Name="NextofKin" ColumnName="NextofKin" />
+                <ScalarProperty Name="kinAddress" ColumnName="kinAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFingerprints">
+            <EntityTypeMapping TypeName="YouthEmpowermentModel.tblFingerprint">
+              <MappingFragment StoreEntitySet="tblFingerprints">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="fingerTemplate" ColumnName="fingerTemplate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPersonalDetails">
+            <EntityTypeMapping TypeName="YouthEmpowermentModel.tblPersonalDetail">
+              <MappingFragment StoreEntitySet="tblPersonalDetails">
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="FingerID" ColumnName="FingerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
