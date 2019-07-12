@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
-  <AutoRefresh>0</AutoRefresh>  
+  <AutoRefresh>0</AutoRefresh>
       <Body>
         <ReportItems>
           <Textbox Name="Textbox4">
@@ -539,7 +539,7 @@
             <Top>10.07619cm</Top>
             <Left>3.81092cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.5cm</Width>
+            <Width>2.79633cm</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -794,7 +794,6 @@
         <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style />
       </Page>
-    
   <ReportParameters>
     <ReportParameter Name="rNames">
       <DataType>String</DataType>
@@ -837,7 +836,6 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>336d4fc7-f99c-4214-8d00-66ae07e5d6af</rd:ReportID>
 </Report>

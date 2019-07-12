@@ -334,6 +334,7 @@ namespace Dashboard
 
         private void bunifuThinButton21_Click(object sender, EventArgs e)
         {
+
             tabControl1.SelectedIndex = (tabControl1.SelectedIndex + 1 < tabControl1.TabCount) ?
                              tabControl1.SelectedIndex + 1 : tabControl1.SelectedIndex;
         }
@@ -530,7 +531,7 @@ namespace Dashboard
 
                     byte[] pic;
                     MemoryStream stream = new MemoryStream();
-                    pictureBox2.Image.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    pictureBox1.Image.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
                     pic = stream.ToArray();
 
 
@@ -913,31 +914,32 @@ namespace Dashboard
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Print(this.panelAuthenticate);
-            ReportParameter[] param = new ReportParameter[]
-            {
-                new ReportParameter("rNames", rName),
-                new ReportParameter("rDateOfBirth", rDateOfBirth.ToShortDateString()),
-                new ReportParameter("rTown", rTown),
-                new ReportParameter("rWard", rWard),
-                new ReportParameter("rContactNo", rContactNo),
-                new ReportParameter("rAddress", rAddress),
-                new ReportParameter("rBizType", rBiztype),
-                new ReportParameter("rReference", rReference),
-                new ReportParameter("rGrantAmount", rGrant),
-                //new ReportParameter("rDate", rDate.ToShortDateString())
-                //new ReportParameter("", )
-            };
+            Print(this.panelAuthenticate);
+            //ReportParameter[] param = new ReportParameter[]
+            //{
+            //    new ReportParameter("rNames", rName),
+            //    new ReportParameter("rDateOfBirth", rDateOfBirth.ToShortDateString()),
+            //    new ReportParameter("rTown", rTown),
+            //    new ReportParameter("rWard", rWard),
+            //    new ReportParameter("rContactNo", rContactNo),
+            //    new ReportParameter("rAddress", rAddress),
+            //    new ReportParameter("rBizType", rBiztype),
+            //    new ReportParameter("rReference", rReference),
+            //    new ReportParameter("rGrantAmount", rGrant),
+            //    //new ReportParameter("rDate", rDate.ToShortDateString())
+            //    //new ReportParameter("", )
+            //};
 
-            this.reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
-            string exeFolder = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+            //this.reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
+            //string exeFolder = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+
+            //this.reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
+            //reportViewer1.LocalReport.ReportPath = "../../Report1.rdlc";
+            //this.reportViewer1.LocalReport.ReportEmbeddedResource = "../../Report1.rdlc";
+
             
-            this.reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
-            reportViewer1.LocalReport.ReportPath = "../../Report1.rdlc";
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "../../Report1.rdlc";            
-
-            this.reportViewer1.LocalReport.SetParameters(param);
-            this.reportViewer1.RefreshReport();
+            //this.reportViewer1.LocalReport.SetParameters(param);
+            //this.reportViewer1.RefreshReport();
         }
 
         private void printDocument1_BeginPrint(object sender, PrintEventArgs e)
